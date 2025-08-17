@@ -6,6 +6,33 @@
   <title>Nuestros recuerdos 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-size: 16px;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      .question p, .gallery-item {
+        font-size: 1rem;
+      }
+      .question button {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+      .gallery-item {
+        padding: 0.8rem;
+      }
+    }
     body {
       font-family: 'Nunito', sans-serif;
       background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
