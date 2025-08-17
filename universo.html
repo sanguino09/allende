@@ -65,6 +65,59 @@
     window.addEventListener('resize', ajustarCanvas);
     ajustarCanvas();
 
+
+    // Genera estrellas con movimiento lento
+    const estrellas = Array.from({ length: 150 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.2,
+      vx: (Math.random() - 0.5) * 0.05,
+      vy: (Math.random() - 0.5) * 0.05
+    }));
+
+    // Crea constelaciones conectando algunas estrellas
+    const constelaciones = [];
+    for (let i = 0; i < 5; i++) {
+      const indices = [];
+      const longitud = 3 + Math.floor(Math.random() * 3);
+      for (let j = 0; j < longitud; j++) {
+        indices.push(Math.floor(Math.random() * estrellas.length));
+      }
+      constelaciones.push(indices);
+    }
+
+    function dibujar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Mueve y dibuja estrellas
+      estrellas.forEach(e => {
+        e.x += e.vx;
+        e.y += e.vy;
+        if (e.x < 0) e.x = canvas.width; if (e.x > canvas.width) e.x = 0;
+        if (e.y < 0) e.y = canvas.height; if (e.y > canvas.height) e.y = 0;
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      });
+
+      // Dibuja constelaciones
+      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+      constelaciones.forEach(indices => {
+        ctx.beginPath();
+        const first = estrellas[indices[0]];
+        ctx.moveTo(first.x, first.y);
+        for (let k = 1; k < indices.length; k++) {
+          const est = estrellas[indices[k]];
+          ctx.lineTo(est.x, est.y);
+        }
+        ctx.stroke();
+      });
+
+      requestAnimationFrame(dibujar);
+    }
+    dibujar();
+    
     // Dibuja estrellas aleatorias
     function dibujarEstrellas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -87,6 +140,8 @@
       const msg = mensajes[Math.floor(Math.random() * mensajes.length)];
       cuadro.textContent = msg;
       cuadro.style.display = 'block';
+      
+      setTimeout(() => (cuadro.style.display = 'none'), 1500);
       setTimeout(() => (cuadro.style.display = 'none'), 3000);
     });
   </script>
