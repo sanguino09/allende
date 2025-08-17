@@ -65,6 +65,7 @@
     window.addEventListener('resize', ajustarCanvas);
     ajustarCanvas();
 
+
     // Genera estrellas con movimiento lento
     const estrellas = Array.from({ length: 150 }, () => ({
       x: Math.random() * canvas.width,
@@ -116,6 +117,22 @@
       requestAnimationFrame(dibujar);
     }
     dibujar();
+    
+    // Dibuja estrellas aleatorias
+    function dibujarEstrellas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < 200; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const r = Math.random() * 1.5;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+      }
+      requestAnimationFrame(dibujarEstrellas);
+    }
+    dibujarEstrellas();
 
     // Muestra mensaje al hacer clic
     const cuadro = document.getElementById('mensaje');
@@ -123,7 +140,9 @@
       const msg = mensajes[Math.floor(Math.random() * mensajes.length)];
       cuadro.textContent = msg;
       cuadro.style.display = 'block';
+      
       setTimeout(() => (cuadro.style.display = 'none'), 1500);
+      setTimeout(() => (cuadro.style.display = 'none'), 3000);
     });
   </script>
 </body>
