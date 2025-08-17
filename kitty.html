@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuestros recuerdos 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+      color: #c71585;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #ff69b4;
+    }
+    .section {
+      margin: 2rem auto;
+      max-width: 700px;
+      text-align: left;
+    }
+    .question {
+      margin-bottom: 1rem;
+    }
+    .question p {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .question button {
+      background: #ffb6c1;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin: 0.3rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .question button:hover {
+      background: #ff85a2;
+    }
+    .result {
+      display: none;
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .gallery {
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      background: white;
+      border: 2px solid #ffc0cb;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .gallery-item:hover {
+      background: #ffeef2;
+    }
+    .gallery-image {
+      display: none;
+      margin-top: 1rem;
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #ff69b4;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Cosas de Nosotros 💖</h1>
+  <div class="section">
+    <h2>Mini test de nuestra relación</h2>
+    <div class="question"><p>1. ¿Cuál es nuestro mote más usado?</p>
+      <button onclick="answer(0)">Pulgui</button>
+      <button onclick="answer(1)">Gatito</button>
+      <button onclick="answer(2)">Pulguita</button>
+    </div>
+    <div class="question"><p>2. ¿Cuál es nuestro mes favorito?</p>
+      <button onclick="answer(1)">Octubre</button>
+      <button onclick="answer(2)">Febrero</button>
+      <button onclick="answer(0)">Diciembre</button>
+    </div>
+    <div class="question"><p>3. ¿Qué canción es 'nuestra canción'?</p>
+      <button onclick="answer(2)">La de los besitos</button>
+      <button onclick="answer(0)">Yellow</button>
+      <button onclick="answer(1)">La de Ed Sheeran</button>
+    </div>
+    <div class="question"><p>4. ¿Qué película vimos en nuestra primera cita?</p>
+      <button onclick="answer(1)">Your Name</button>
+      <button onclick="answer(0)">Shrek</button>
+      <button onclick="answer(2)">No recuerdo, solo miraba tus ojos</button>
+    </div>
+    <div class="question"><p>5. ¿Qué animal representa nuestro amor?</p>
+      <button onclick="answer(2)">Dos pingüinitos</button>
+      <button onclick="answer(0)">Un panda y un gato</button>
+      <button onclick="answer(1)">Dos koalas</button>
+    </div>
+    <div class="result" id="result">
+      <h3>¡Conoces nuestra historia de amor! 💕</h3>
+      <p>Esta página es para revivir cada momento que hemos compartido y los miles que nos quedan. Te amo 🥰</p>
+    </div>
+  </div>
+
+  <div class="gallery section">
+    <h2>📸 Nuestros recuerdos</h2>
+    <div class="gallery-item" onclick="toggleImage('img1')">
+      Nuestro primer viaje ✈️
+      <img id="img1" class="gallery-image" src="https://placekitten.com/600/400" alt="Nuestro primer viaje">
+    </div>
+    <div class="gallery-item" onclick="toggleImage('img2')">
+      Nuestra primera foto juntos 📷
+      <img id="img2" class="gallery-image" src="https://placekitten.com/601/401" alt="Nuestra primera foto">
+    </div>
+    <div class="gallery-item" onclick="toggleImage('img3')">
+      Un día cualquiera contigo 💗
+      <img id="img3" class="gallery-image" src="https://placekitten.com/602/402" alt="Un día contigo">
+    </div>
+  </div>
+
+  <a href="index.html">← Volver al inicio</a>
+
+  <script>
+    let responses = [];
+    function answer(val) {
+      responses.push(val);
+      if (responses.length === 5) {
+        document.getElementById('result').style.display = 'block';
+      }
+    }
+    function toggleImage(id) {
+      const img = document.getElementById(id);
+      img.style.display = img.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
