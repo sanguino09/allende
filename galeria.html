@@ -17,16 +17,28 @@
       text-align: center;
       margin-top: 0;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+    .gallery {
       margin-top: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .grid img {
-      width: 100%;
+    .gallery details {
+      background: white;
+      border: 2px solid #ffc0cb;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .gallery summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .gallery img {
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     a.back {
       display: block;
@@ -42,12 +54,24 @@
 </head>
 <body>
   <h1>Galería de recuerdos</h1>
-  <div class="grid">
-    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 1">
-    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 2">
-    <img src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 3">
-    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 4">
+  <div class="gallery">
+    <details>
+      <summary>Recuerdo 1</summary>
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 1">
+    </details>
+    <details>
+      <summary>Recuerdo 2</summary>
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 2">
+    </details>
+    <details>
+      <summary>Recuerdo 3</summary>
+      <img src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 3">
+    </details>
+    <details>
+      <summary>Recuerdo 4</summary>
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 4">
+    </details>
   </div>
-  <a href="index.html" class="back">← Volver al cuestionario</a>
+  <a href="index.html" class="back">← Volver al inicio</a>
 </body>
 </html>
