@@ -62,21 +62,38 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', ajustarCanvas);
+    const estrellas = [];
+    function crearEstrellas() {
+      estrellas.length = 0;
+      for (let i = 0; i < 150; i++) {
+        estrellas.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.5,
+          alpha: Math.random(),
+          delta: Math.random() * 0.02 + 0.005
+        });
+      }
+    }
+    window.addEventListener('resize', () => {
+      ajustarCanvas();
+      crearEstrellas();
+    });
     ajustarCanvas();
+    crearEstrellas();
 
-    // Dibuja estrellas aleatorias
     function dibujarEstrellas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < 200; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const r = Math.random() * 1.5;
+      for (const estrella of estrellas) {
+        estrella.alpha += estrella.delta;
+        if (estrella.alpha <= 0 || estrella.alpha >= 1) estrella.delta *= -1;
+        ctx.globalAlpha = estrella.alpha;
         ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.arc(estrella.x, estrella.y, estrella.r, 0, 2 * Math.PI);
         ctx.fillStyle = '#ffffff';
         ctx.fill();
       }
+      ctx.globalAlpha = 1;
       requestAnimationFrame(dibujarEstrellas);
     }
     dibujarEstrellas();
@@ -87,7 +104,7 @@
       const msg = mensajes[Math.floor(Math.random() * mensajes.length)];
       cuadro.textContent = msg;
       cuadro.style.display = 'block';
-      setTimeout(() => (cuadro.style.display = 'none'), 3000);
+      setTimeout(() => (cuadro.style.display = 'none'), 6000);
     });
   </script>
 </body>
