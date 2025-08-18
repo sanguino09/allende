@@ -83,40 +83,74 @@
       font-weight: bold;
       text-decoration: none;
     }
+    #progress-container {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    progress {
+      width: 100%;
+      height: 20px;
+    }
+    .question button.correct {
+      background: #4caf50;
+    }
+    .question button.incorrect {
+      background: #f44336;
+    }
+    .question button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    #result button {
+      background: #ff69b4;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    #result button:hover {
+      background: #ff85a2;
+    }
   </style>
 </head>
 <body>
   <h1>💖 Cosas de Nosotros 💖</h1>
   <div class="section">
     <h2>Mini test de nuestra relación</h2>
+    <div id="progress-container">
+      <progress id="progress" max="5" value="0"></progress>
+      <span id="progress-text">0/5</span>
+    </div>
     <div class="question"><p>1. ¿Cuál es nuestro mote más usado?</p>
-      <button onclick="answer(0, this)">Pulgui</button>
-      <button onclick="answer(1, this)">Gatito</button>
-      <button onclick="answer(2, this)">Pulguita</button>
+      <button data-correct="true" onclick="answer(true, this)">Pulgui</button>
+      <button onclick="answer(false, this)">Gatito</button>
+      <button onclick="answer(false, this)">Pulguita</button>
     </div>
     <div class="question"><p>2. ¿Cuál es nuestro mes favorito?</p>
-      <button onclick="answer(1, this)">Octubre</button>
-      <button onclick="answer(2, this)">Febrero</button>
-      <button onclick="answer(0, this)">Diciembre</button>
+      <button onclick="answer(false, this)">Octubre</button>
+      <button onclick="answer(false, this)">Febrero</button>
+      <button data-correct="true" onclick="answer(true, this)">Diciembre</button>
     </div>
     <div class="question"><p>3. ¿Qué canción es 'nuestra canción'?</p>
-      <button onclick="answer(2, this)">La de los besitos</button>
-      <button onclick="answer(0, this)">Yellow</button>
-      <button onclick="answer(1, this)">La de Ed Sheeran</button>
+      <button onclick="answer(false, this)">La de los besitos</button>
+      <button data-correct="true" onclick="answer(true, this)">Yellow</button>
+      <button onclick="answer(false, this)">La de Ed Sheeran</button>
     </div>
     <div class="question"><p>4. ¿Qué película vimos en nuestra primera cita?</p>
-      <button onclick="answer(1, this)">Your Name</button>
-      <button onclick="answer(0, this)">Shrek</button>
-      <button onclick="answer(2, this)">No recuerdo, solo miraba tus ojos</button>
+      <button onclick="answer(false, this)">Your Name</button>
+      <button data-correct="true" onclick="answer(true, this)">Shrek</button>
+      <button onclick="answer(false, this)">No recuerdo, solo miraba tus ojos</button>
     </div>
     <div class="question"><p>5. ¿Qué animal representa nuestro amor?</p>
-      <button onclick="answer(2, this)">Dos pingüinitos</button>
-      <button onclick="answer(0, this)">Un panda y un gato</button>
-      <button onclick="answer(1, this)">Dos koalas</button>
+      <button onclick="answer(false, this)">Dos pingüinitos</button>
+      <button data-correct="true" onclick="answer(true, this)">Un panda y un gato</button>
+      <button onclick="answer(false, this)">Dos koalas</button>
     </div>
     <div class="result" id="result">
       <h3>¡Resultado!</h3>
       <p></p>
+      <button id="restart" onclick="restart()">Reintentar</button>
     </div>
   </div>
 
@@ -125,19 +159,59 @@
   <script>
     let correct = 0;
     let answered = 0;
-    function answer(val, btn) {
+
+    function answer(isCorrect, btn) {
       if (btn.parentNode.classList.contains('answered')) return;
-      if (val === 0) correct++;
+      if (isCorrect) {
+        correct++;
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('incorrect');
+        btn.parentNode.querySelector('[data-correct="true"]').classList.add('correct');
+      }
       answered++;
       btn.parentNode.classList.add('answered');
       btn.parentNode.querySelectorAll('button').forEach(b => b.disabled = true);
-      if (answered === 5) {
-        const result = document.getElementById('result');
-        result.style.display = 'block';
-        const msg = `Acertaste ${correct} de 5 preguntas ❤️`;
-        result.querySelector('p').innerText = msg;
-      }
+      updateProgress();
+      if (answered === 5) showResult();
     }
+
+    function updateProgress() {
+      const progress = document.getElementById('progress');
+      const text = document.getElementById('progress-text');
+      progress.value = answered;
+      text.textContent = `${answered}/5`;
+    }
+
+    function showResult() {
+      const result = document.getElementById('result');
+      result.style.display = 'block';
+      let msg;
+      if (correct === 5) {
+        msg = '¡Perfecto! Acertaste todas 💘';
+      } else if (correct >= 3) {
+        msg = `¡Bien! Acertaste ${correct} de 5 😍`;
+      } else {
+        msg = `Acertaste ${correct} de 5. ¡A conocernos mejor! 😽`;
+      }
+      result.querySelector('p').innerText = msg;
+    }
+
+    function restart() {
+      correct = 0;
+      answered = 0;
+      document.querySelectorAll('.question').forEach(q => {
+        q.classList.remove('answered');
+        q.querySelectorAll('button').forEach(b => {
+          b.disabled = false;
+          b.classList.remove('correct', 'incorrect');
+        });
+      });
+      document.getElementById('result').style.display = 'none';
+      updateProgress();
+    }
+
+    updateProgress();
   </script>
 </body>
 </html>
