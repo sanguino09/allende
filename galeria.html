@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería de recuerdos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+      color: #c71585;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .grid img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    a.back {
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      color: #d63384;
+      text-decoration: none;
+    }
+    a.back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galería de recuerdos</h1>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 1">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 2">
+    <img src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 3">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=60" alt="Recuerdo 4">
+  </div>
+  <a href="index.html" class="back">← Volver al cuestionario</a>
+</body>
+</html>
